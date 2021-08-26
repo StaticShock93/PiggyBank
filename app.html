@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Chacta I. Brice</title>
+    <title>PIGGY BANK: A Coding Project By Chacta I. Brice</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,8 +30,8 @@
     <!-- ==== Nav Section ===== -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/index.html"><img class="logo me-2" src="/img/CIB-mark-shadowAlt-SVG.svg" width="30"
-                    height="24" alt="mark">APP NAME</a>
+            <a class="navbar-brand" href="/index.html"><img class="logo me-2" src="/img/CIB-mark-shadowAlt-SVG.svg"
+                    width="30" height="24" alt="mark">PIGGY BANK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,107 @@
 
     <!-- ==== Main Section ===== -->
     <main class="flex-shrink-0">
-        <div class="container"></div>
+        <div class="container px-5">
+            <div class="row">
+                <div class="col">
+                    <h1 class="d-flex justify-content-center justify-content-md-start my-2">Loan Calculator</h1>
+                </div>
+
+                <!-- Calculator Input Form / Output Section -->
+                <div class="row row-cols-1 row-cols-lg-2">
+                    <div class="col col-lg-6 bg-light">
+                        <!-- Calculator Input Form -->
+                        <form class="row p-2 g-3">
+                            <!-- Loan input-->
+                            <div class="col col-12">
+                                <label for="loanAmount">Loan Amount:</label>
+                                <input type="number" class="form-control" id="loanAmount" name="loanAmount"
+                                    placeholder="Enter loan amount" aria-label="Loan Amount" value="">
+                            </div>
+                            <!-- Payment input-->
+                            <div class="col col-12">
+                                <label for="payments">Payments:</label>
+                                <input type="number" class="form-control" name="payments" id="payments"
+                                    placeholder="Enter number of payments" aria-label="Payments" value="">
+                            </div>
+                            <!-- Interest input -->
+                            <div class="col col-12">
+                                <label for="rate">Interest rate:</label>
+                                <input type="number" class="form-control" name="interestRate" id="interestRate"
+                                    placeholder="Enter interest rate" aria-label="Interest Rate" value="">
+                            </div>
+                            <!-- btnSubmit -->
+                            <div class="col d-flex justify-content-center justify-content-lg-end">
+                                <button id="btnSubmit" class="btn btn-lg btn-outline-success mt-1">Calculate</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Calculator Output -->
+                    <div class="col col-lg-4">
+                        <h5
+                            class="fst-italic text-dark d-flex justify-content-center justify-content-lg-end mt-2 mt-lg-0">
+                            Your Monthly Payments
+                        </h5>
+                        <h3
+                            class="d-flex justify-content-center justify-content-lg-end fw-bold text-dark display-1 my-3">
+                            220
+                            <!-- Monthly Payment Result Goes Here -->
+                        </h3>
+                        <div class="d-flex justify-content-between">
+                            <p>Total Principal</p>
+                            <p id="totalPrincipal" class="">
+                                15000.00
+                                <!-- Total Principal Result Goes Here -->
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Total Interest</p>
+                            <p id="totalInterest" class="">
+                                15000.00
+                                <!-- Total Interest Result Goes Here -->
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Total Cost</p>
+                            <p id="totalCost" class="">
+                                15000.00
+                                <!-- Total Interest Result Goes Here -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2">
+                        <!-- empty space in grid -->
+                    </div>
+                </div>
+
+                <!-- Table Results/ Interest Repayment Schedule Section -->
+                <section class="table-responsive gx-0">
+                    <table class="table table-striped mt-3">
+                        <thead class="text-light topTableRow">
+                            <tr>
+                                <th scope="col">Month</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Principal</th>
+                                <th scope="col">Interest</th>
+                                <th scope="col">Total Interest</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                            </tr>
+                            <!--TABLE RESULTS GO HERE -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
     </main>
 
 
@@ -83,7 +183,8 @@
                     <div class="row">
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
                         </div>
-                        <div class="col social"><a href="https://github.com/StaticShock93" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+                        <div class="col social"><a href="https://github.com/StaticShock93" target="_blank"><i
+                                    class="fab fa-github fa-2x"></i></a>
                         </div>
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
                         </div>

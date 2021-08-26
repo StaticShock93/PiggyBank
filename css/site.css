@@ -9,6 +9,10 @@ body {
     color: var(--dark-color);
 }
 
+p{
+    margin: 0;
+}
+
 nav {
     background-color: var(--dark-color);
 }
@@ -45,6 +49,10 @@ h6 {
 /* Comment checklist out to return to gray coloring */
 .checklist>li i {
     color: var(--secondary-color);
+}
+
+.topTableRow{
+    background-color: var(--primary-color);
 }
 
 code[class*="language-"],

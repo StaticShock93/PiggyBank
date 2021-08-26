@@ -11,7 +11,7 @@ body {
     color: var(--dark-color);
 }
 
-p{
+p {
     margin: 0;
 }
 
@@ -50,10 +50,10 @@ h6 {
 
 /* Comment checklist out to return to gray coloring */
 .checklist>li i {
-    color: var(--secondary-color);
+    color: var(--dark-color);
 }
 
-.topTableRow{
+.topTableRow {
     background-color: var(--primary-color);
 }
 
@@ -85,8 +85,8 @@ footer .social>a:hover {
     color: var(--secondary-color);
 }
 
-.navbar-brand{
-    font-family: 'Racing Sans One', cursive ;
+.navbar-brand {
+    font-family: 'Racing Sans One', cursive;
 }
 
 

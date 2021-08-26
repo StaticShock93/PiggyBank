@@ -48,7 +48,8 @@
                         <a class="nav-link" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://github.com/StaticShock93/PiggyBank">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/StaticShock93/PiggyBank">Git
+                            Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="https://chactaibrice.netlify.app/">About</a>
@@ -75,56 +76,54 @@
                             <div class="col col-12">
                                 <label for="loanAmount">Loan Amount:</label>
                                 <input type="number" class="form-control" id="loanAmount" name="loanAmount"
-                                    placeholder="Enter loan amount" aria-label="Loan Amount" value="">
+                                    placeholder="Enter loan amount" aria-label="Loan Amount" value="15000">
                             </div>
                             <!-- Payment input-->
                             <div class="col col-12">
-                                <label for="payments">Payments:</label>
-                                <input type="number" class="form-control" name="payments" id="payments"
-                                    placeholder="Enter number of payments" aria-label="Payments" value="">
+                                <label for="paymentTerm">Payment term (Months):</label>
+                                <input type="number" class="form-control" name="paymentTerm" id="paymentTerm"
+                                    placeholder="Payment term" aria-label="Payment termi" value="60">
                             </div>
                             <!-- Interest input -->
                             <div class="col col-12">
                                 <label for="rate">Interest rate:</label>
                                 <input type="number" class="form-control" name="interestRate" id="interestRate"
-                                    placeholder="Enter interest rate" aria-label="Interest Rate" value="">
+                                    placeholder="Enter interest rate" aria-label="Interest Rate" value="3">
                             </div>
                             <!-- btnSubmit -->
                             <div class="col d-flex justify-content-center justify-content-lg-end">
-                                <button id="btnSubmit" class="btn btn-lg btn-outline-success mt-1">Calculate</button>
+                                <button type="button" id="btnSubmit" class="btn btn-lg btn-outline-success mt-1">Calculate</button>
                             </div>
                         </form>
                     </div>
+
+
                     <!-- Calculator Output / Right-side totals  -->
                     <div class="col col-lg-5 me-4 pe-5 ms-3">
                         <h5
                             class="fst-italic text-dark d-flex justify-content-center justify-content-lg-end mt-2 mt-lg-0">
                             Your Monthly Payments
                         </h5>
-                        <h3
+                        <h3 id="totalMonthlyPayments"
                             class="d-flex justify-content-center justify-content-lg-end fw-bold text-dark display-1 my-3">
-                            $220.98
                             <!-- Monthly Payment Result Goes Here -->
                         </h3>
                         <div class="d-flex justify-content-between me-4">
                             <p>Total Principal</p>
                             <p id="totalPrincipal">
-                                15000.00
                                 <!-- Total Principal Result Goes Here -->
                             </p>
                         </div>
                         <div class="d-flex justify-content-between me-4">
                             <p>Total Interest</p>
                             <p id="totalInterest">
-                                15000.00
                                 <!-- Total Interest Result Goes Here -->
                             </p>
                         </div>
                         <div class="d-flex justify-content-between me-4">
                             <p>Total Cost</p>
                             <p id="totalCost">
-                                15000.00
-                                <!-- Total Interest Result Goes Here -->
+                                <!-- Total Cost Result Goes Here -->
                             </p>
                         </div>
                     </div>
@@ -133,8 +132,9 @@
                     </div>
                 </div>
 
+
                 <!-- Table Results/ Interest Repayment Schedule Section -->
-                <section class="table-responsive gx-0">
+                <section class=" table-responsive gx-0">
                     <table class="table table-striped mt-3">
                         <thead class="text-light topTableRow">
                             <tr>
@@ -146,15 +146,7 @@
                                 <th scope="col">Balance</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                            </tr>
+                        <tbody id="tableResults">
                             <!--TABLE RESULTS GO HERE -->
                         </tbody>
                     </table>
@@ -196,6 +188,18 @@
 
 
     </footer>
+
+    <template class="pbTemplate">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -206,6 +210,9 @@
 
     <!-- Javascript stylessheet / site.js -->
     <script src="/js/site.js">
+    </script>
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click", getValues);
     </script>
 </body>
 

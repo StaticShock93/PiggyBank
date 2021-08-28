@@ -60,6 +60,61 @@ function getValues() {
 }
 
 
+
+// create function that generates array of total months
+function generateMonths(paymentTerm){
+
+}
+
+// generate principal payment
+function generatePrincipalPaid (loanAmount) {
+
+}
+
+// generate interest payment
+function interestPayment(interestRate) {
+
+}
+
+// generate total interest paid
+function totatlInterestPaid(interestRate){
+
+}
+
+// generate remaining balance
+function remainingBalance() {
+    
+}
+
+// Display functions
+function displayTotalMonthlyPayment(totalMonthlyPayment) {
+    // TRY to add comma to index -7
+    let total = totalMonthlyPayment
+    document.getElementById("totalMonthlyPayments").innerHTML = `$${totalMonthlyPayment}`;
+}
+// displays total principal 
+function displayTotalPrincipal(totalPrincipal) {
+    document.getElementById("totalPrincipal").innerHTML = "$" + totalPrincipal;
+}
+// displays total interest
+function displayTotalInterest(totalInterest) {
+    document.getElementById("totalInterest").innerHTML = "$" + totalInterest;
+}
+// displays total cost
+function displayTotalCost(totalCost) {
+    document.getElementById("totalCost").innerHTML = "$" + totalCost;
+}
+
+// display table functions
+function display
+
+
+
+// create +5-incrementing loop to generate values to tableResults section
+// store and then use the last index value and push total payment/principal/interest/cost section
+
+
+
 // Generate values
 // Logic function
 // function generateMonths(paymentTerm) {
@@ -70,10 +125,6 @@ function getValues() {
 //     }
 // }
 
-// function generaterTotalMonthlyPayment (loanAmount, paymentTerm, interestRate) {
-//     let totalMonthlyPayment = (loanAmount)*(interestRate/12000)/(1-(1+interestRate/1200)**(-paymentTerm));
-
-// }
 
 
 
@@ -93,29 +144,3 @@ function getValues() {
 
 
 // }
-
-
-
-
-
-
-// Display functions
-function displayTotalMonthlyPayment(totalMonthlyPayment) {
-    document.getElementById("totalMonthlyPayments").innerHTML = "$" + totalMonthlyPayment;
-}
-
-function displayTotalPrincipal(totalPrincipal) {
-    document.getElementById("totalPrincipal").innerHTML = "$" + totalPrincipal;
-}
-
-function displayTotalInterest(totalInterest) {
-    document.getElementById("totalInterest").innerHTML = "$" + totalInterest;
-}
-
-function displayTotalCost(totalCost) {
-    document.getElementById("totalCost").innerHTML = "$" + totalCost;
-}
-
-
-// create +5-incrementing loop to generate values to tableResults section
-// store and then use the last index value and push total payment/principal/interest/cost section

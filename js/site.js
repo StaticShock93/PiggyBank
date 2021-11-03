@@ -1,146 +1,132 @@
-// Get input values from the page
-// Controller function
-// Has to push all values to screen, all data outputs pass through here
-function getValues() {
+// get values from the page and store as letant variables to global memory
+// get loan amount, term(months), and interest rate
+// get btn from page to run select
+function getLoan() {
+  const loan = document.getElementById("loanAmount").value;
+  loan = parseInt(loan);
+  if (Number.isInteger(loan)) return loan;
+}
+function getTerm() {
+  const term = document.getElementById("term").value;
+  term = parseInt(term);
+  if (Number.isInteger(term)) return term;
+}
+function getRate() {
+  const rate = document.getElementById("rate").value;
+  rate = parseInt(rate);
+  if (Number.isInteger(rate)) return rate;
+}
+function getPbTemplate() {
+  const pbTemplate = document.getElementById("pbTemplate");
+  return pbTemplate;
+}
 
-    // get values from page
-    let loanAmount = document.getElementById("loanAmount").value
-    let paymentTerm = document.getElementById("paymentTerm").value
-    let interestRate = document.getElementById("interestRate").value
+console.log(rate);
 
-    // parse for integers
-    loanAmount = parseInt(loanAmount);
-    paymentTerm = parseInt(paymentTerm);
-    interestRate = parseInt(interestRate);
+function totalMonthlyPayment(loan, term, rate) {
+  const totalMonthlyPayment =
+    (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
+  return totalMonthlyPayment.toFixed(2);
+}
 
+function totalInterest(totalMonthlyPayment, term, loan) {
+  const totalInterest = totalMonthlyPayment * term - loan;
+  return totalInterest.toFixed(2);
+}
 
+function totalCost(loan, totalInterest) {
+  let totalCost = loan + totalInterest;
+  return totalCost.toFixed(2);
+}
+// fix numbers to 2 decimal spaces
+totalMonthlyPayment = totalMonthlyPayment.toFixed(2);
+loan = loan.toFixed(2);
+// totalInterest = totalInterest.toFixed(2)
+totalCost = totalCost.toFixed(2);
+totalInterest = totalInterest.toFixed(2);
+console.log(totalInterest);
 
+// display numbers section
+function displayTotals(totalMonthlyPayment) {
+  document.getElementById("totalMonthlyPayments").innerHTML =
+    "$" + totalMonthlyPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById("totalPrincipal").innerHTML =
+    "$" + loan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById("totalInterest").innerHTML =
+    "$" + totalInterest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById("totalCost").innerHTML =
+    "$" + totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-    // Validate integers
-    if (Number.isInteger(loanAmount) && Number.isInteger(paymentTerm) && Number.isInteger(interestRate)) {
-        // call generateValues()
-        // let values = generateValues(loanAmount, paymentTerm, interestRate);
+// display table section
+function displayTable(...params) {
+  let tableBody = document.getElementById("tableResults");
+  let templateRow = document.getElementById("pbTemplate");
+  tableBody.innerHTML = "";
 
-        let totalMonthlyPayment = (loanAmount) * (interestRate / 1200) / (1 - (1 + interestRate / 1200) ** (-paymentTerm));
-        totalMonthlyPayment = totalMonthlyPayment.toFixed(2);
-
-        // call displayData()
-        displayTotalMonthlyPayment(totalMonthlyPayment);
-
-        let totalPrincipal = loanAmount.toFixed(2);
-        displayTotalPrincipal(totalPrincipal);
-
-        let totalInterest = totalMonthlyPayment * paymentTerm - loanAmount;
-        totalInterest = totalInterest.toFixed(2)
-        displayTotalInterest(totalInterest);
-
-        let totalCost = totalMonthlyPayment * paymentTerm;
-        totalCost = totalCost.toFixed(2);
-        displayTotalCost(totalCost);
+  for (let index = 0; index <= term; index += 5) {
+    let monthArr = [];
+    for (let i = 0; i < term; i++) {
+      monthArr.push(monthArr[i]);
     }
+    let month = monthArr;
 
+    let tableRow = document.importNode(templateRow.content, true);
 
+    let rowCols = tableRow.querySelectorAll("td");
+    rowCols[0].classList.add(month[index]);
+    rowCols[0].textContent = month[index];
 
-    if (interestRate <= 0) {
-        let totalMonthlyPayment = loanAmount / paymentTerm;
-        totalMonthlyPayment = totalMonthlyPayment.toFixed(2);
-        displayTotalMonthlyPayment(totalMonthlyPayment);
+    rowCols[1].classList.add(month[index + 1]);
+    rowCols[1].textContent = month[index + 1];
 
-        let totalPrincipal = loanAmount.toFixed(2);
-        displayTotalPrincipal(totalPrincipal);
+    rowCols[2].classList.add(month[index + 2]);
+    rowCols[2].textContent = month[index + 2];
 
-        let totalInterest = totalMonthlyPayment * paymentTerm - loanAmount;
-        totalInterest = totalInterest.toFixed(2)
-        displayTotalInterest(totalInterest);
+    rowCols[3].classList.add(month[index + 3]);
+    rowCols[3].textContent = month[index + 3];
 
-        let totalCost = totalMonthlyPayment * paymentTerm;
-        totalCost = totalCost.toFixed(2);
-        displayTotalCost(totalCost);
-    }
+    rowCols[4].classList.add(month[index + 4]);
+    rowCols[4].textContent = month[index + 4];
+
+    // add all the rows to the table
+    tableBody.appendChild(tableRow);
+  }
 }
+// add event listener and run functionality
+const btn = document.getElementById("btnSubmit");
+const loan = btn.addEventListener("click", getLoan);
+const term = btn.addEventListener("click", getTerm);
+const rate = btn.addEventListener("click", getRate);
+const pbTemplate = btn.addEventListener("click", getPbTemplate);
 
+// btn.addEventListener('click', () => {
+//     let loan = document.getElementById("loanAmount").value;
+//     let term = document.getElementById("term").value;
+//     let rate = document.getElementById("rate").value;
+//     console.log(loan)
 
+//     let totalMonthlyPayment = (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
+//     let totalPrincipal = loan;
+//     let totalInterest = (loan * rate) / 1200;
+//     let totalCost = totalPrincipal + totalInterest;
+//     console.log(totalPrincipal)
 
-// create function that generates array of total months
-function generateMonths(paymentTerm){
+//     document.getElementById('totalMonthlyPayments').innerHTML = "$" + totalMonthlyPayment.toFixed(2)
 
-}
+//     // document.getElementById('totalPrincipal').innerHTML = '$' + totalPrincipal.toFixed(2)
+//     // document.getElementById('totalInterest').innerHTML = '$' + totalInterest.toFixed(2)
+//     // document.getElementById('totalCost').innerHTML = '$' + totalCost.toFixed(2)
+// })
+// btn.addEventListener('click', () => {
+//     let loan = document.getElementById("loanAmount").value;
+//     document.getElementById('totalPrincipal').innerHTML = "$" + totalInterest.toFixed(2)
 
-// generate principal payment
-function generatePrincipalPaid (loanAmount) {
+// })
 
-}
+//
 
-// generate interest payment
-function interestPayment(interestRate) {
+// use retrieved values to create needed generated values
 
-}
-
-// generate total interest paid
-function totatlInterestPaid(interestRate){
-
-}
-
-// generate remaining balance
-function remainingBalance() {
-    
-}
-
-// Display functions
-function displayTotalMonthlyPayment(totalMonthlyPayment) {
-    // TRY to add comma to index -7
-    let total = totalMonthlyPayment
-    document.getElementById("totalMonthlyPayments").innerHTML = `$${totalMonthlyPayment}`;
-}
-// displays total principal 
-function displayTotalPrincipal(totalPrincipal) {
-    document.getElementById("totalPrincipal").innerHTML = "$" + totalPrincipal;
-}
-// displays total interest
-function displayTotalInterest(totalInterest) {
-    document.getElementById("totalInterest").innerHTML = "$" + totalInterest;
-}
-// displays total cost
-function displayTotalCost(totalCost) {
-    document.getElementById("totalCost").innerHTML = "$" + totalCost;
-}
-
-// display table functions
-function display
-
-
-
-// create +5-incrementing loop to generate values to tableResults section
-// store and then use the last index value and push total payment/principal/interest/cost section
-
-
-
-// Generate values
-// Logic function
-// function generateMonths(paymentTerm) {
-//     let pbTermArray = [];
-
-//     for (let index = paymentTerm; index <= paymentTerm; index++) {
-//         pbTermArray.push(index);
-//     }
-// }
-
-
-
-
-// function generateTableValues(balance, term, rate) {
-
-//     let pbArray = [];
-
-//     let values = generateValues(balance) 
-
-
-//     // Generate amoritization table values
-//     // Generate total monthly payments
-//     // Genereat total principal
-//     // Genereat total interest
-//     // Genereat total cost
-
-
-
-// }
+// display the generated values to the page in the imported template and specified locations
+// // display function should display all numbers at once

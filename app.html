@@ -76,19 +76,19 @@
                             <div class="col col-12">
                                 <label for="loanAmount">Loan Amount:</label>
                                 <input type="number" class="form-control" id="loanAmount" name="loanAmount"
-                                    placeholder="Enter loan amount" aria-label="Loan Amount" value="15000">
+                                    placeholder="Enter loan amount" aria-label="Loan Amount" value="25000">
                             </div>
                             <!-- Payment input-->
                             <div class="col col-12">
                                 <label for="paymentTerm">Payment term (Months):</label>
-                                <input type="number" class="form-control" name="paymentTerm" id="paymentTerm"
-                                    placeholder="Payment term" aria-label="Payment termi" value="60">
+                                <input type="number" class="form-control" name="paymentTerm" id="term"
+                                    placeholder="Payment term" aria-label="Payment term" value="60">
                             </div>
                             <!-- Interest input -->
                             <div class="col col-12">
                                 <label for="rate">Interest rate:</label>
-                                <input type="number" class="form-control" name="interestRate" id="interestRate"
-                                    placeholder="Enter interest rate" aria-label="Interest Rate" value="3">
+                                <input type="number" class="form-control" name="interestRate" id="rate"
+                                    placeholder="Enter interest rate" aria-label="Interest Rate" value="5">
                             </div>
                             <!-- btnSubmit -->
                             <div class="col d-flex justify-content-center justify-content-lg-end">
@@ -189,7 +189,7 @@
 
     </footer>
 
-    <template class="pbTemplate">
+    <template id="pbTemplate">
         <tr>
             <td></td>
             <td></td>
@@ -212,7 +212,8 @@
     <script src="/js/site.js">
     </script>
     <script>
-        document.getElementById("btnSubmit").addEventListener("click", getValues);
+        
+        // document.getElementById("btnSubmit").addEventListener("click", displayChart);
     </script>
 </body>
 

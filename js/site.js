@@ -1,105 +1,136 @@
 // get values from the page and store as letant variables to global memory
 // get loan amount, term(months), and interest rate
 // get btn from page to run select
-function getLoan() {
-  const loan = document.getElementById("loanAmount").value;
-  loan = parseInt(loan);
-  if (Number.isInteger(loan)) return loan;
-}
-function getTerm() {
-  const term = document.getElementById("term").value;
-  term = parseInt(term);
-  if (Number.isInteger(term)) return term;
-}
-function getRate() {
-  const rate = document.getElementById("rate").value;
-  rate = parseInt(rate);
-  if (Number.isInteger(rate)) return rate;
-}
-function getPbTemplate() {
-  const pbTemplate = document.getElementById("pbTemplate");
-  return pbTemplate;
-}
+const btn = document.getElementById("btnSubmit");
+btn.addEventListener("click", runShit);
+function runShit() {
+  const loan1 = getLoan();
+  const term1 = getTerm();
+  const rate1 = getRate();
+  const pbTemplate1 = getPbTemplate();
+  const totalMonthlyPayment1 = totalMonthlyPayment(loan1, term1, rate1);
+  const totalInterest1 = totalInterest(totalMonthlyPayment1, term1, loan1);
+  const totalCost1 = totalCost(loan1, totalInterest1);
+  const displayTotals1 = displayTotals(
+    totalMonthlyPayment1,
+    totalInterest1,
+    totalCost1,
+    loan1
+  );
+  const months1 = months(term1);
+  const displayTable1 = displayTable(term1, months1);
 
-console.log(rate);
+  function getLoan() {
+    let loan = document.getElementById("loanAmount").value;
+    loan = parseInt(loan);
+    if (Number.isInteger(loan)) return loan;
+  }
+  function getTerm() {
+    let term = document.getElementById("term").value;
+    term = parseInt(term);
+    if (Number.isInteger(term)) return term;
+  }
+  function getRate() {
+    let rate = document.getElementById("rate").value;
+    rate = parseInt(rate);
+    if (Number.isInteger(rate)) return rate;
+  }
+  function getPbTemplate() {
+    let pbTemplate = document.getElementById("pbTemplate");
+    return pbTemplate;
+  }
 
-function totalMonthlyPayment(loan, term, rate) {
-  const totalMonthlyPayment =
-    (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
-  return totalMonthlyPayment.toFixed(2);
-}
+  function totalMonthlyPayment(loan, term, rate) {
+    let totalMonthlyPayment =
+      (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
+    return totalMonthlyPayment.toFixed(2);
+  }
 
-function totalInterest(totalMonthlyPayment, term, loan) {
-  const totalInterest = totalMonthlyPayment * term - loan;
-  return totalInterest.toFixed(2);
-}
+  function totalInterest(totalMonthlyPayment, term, loan) {
+    let totalInterest = totalMonthlyPayment * term - loan;
+    return totalInterest.toFixed(2);
+  }
 
-function totalCost(loan, totalInterest) {
-  let totalCost = loan + totalInterest;
-  return totalCost.toFixed(2);
-}
-// fix numbers to 2 decimal spaces
-totalMonthlyPayment = totalMonthlyPayment.toFixed(2);
-loan = loan.toFixed(2);
-// totalInterest = totalInterest.toFixed(2)
-totalCost = totalCost.toFixed(2);
-totalInterest = totalInterest.toFixed(2);
-console.log(totalInterest);
+  function totalCost(loan, totalInterest) {
+    parseFloat(totalInterest);
+    parseInt(loan);
+    loan += totalInterest;
+    return loan;
+  }
 
-// display numbers section
-function displayTotals(totalMonthlyPayment) {
-  document.getElementById("totalMonthlyPayments").innerHTML =
-    "$" + totalMonthlyPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  document.getElementById("totalPrincipal").innerHTML =
-    "$" + loan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  document.getElementById("totalInterest").innerHTML =
-    "$" + totalInterest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  document.getElementById("totalCost").innerHTML =
-    "$" + totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-// display table section
-function displayTable(...params) {
-  let tableBody = document.getElementById("tableResults");
-  let templateRow = document.getElementById("pbTemplate");
-  tableBody.innerHTML = "";
-
-  for (let index = 0; index <= term; index += 5) {
-    let monthArr = [];
-    for (let i = 0; i < term; i++) {
-      monthArr.push(monthArr[i]);
+  function months(term) {
+    const months = [];
+    for (let i = 1; i <= term; i++) {
+      months.push(i);
     }
-    let month = monthArr;
+    return months;
+  }
 
-    let tableRow = document.importNode(templateRow.content, true);
+  // display numbers section
+  function displayTotals(totalMonthlyPayment, totalInterest, totalCost, loan) {
+    document.getElementById("totalMonthlyPayments").innerHTML =
+      "$" +
+      totalMonthlyPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.getElementById("totalPrincipal").innerHTML =
+      "$" + loan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.getElementById("totalInterest").innerHTML =
+      "$" + totalInterest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.getElementById("totalCost").innerHTML =
+      "$" + totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
-    let rowCols = tableRow.querySelectorAll("td");
-    rowCols[0].classList.add(month[index]);
-    rowCols[0].textContent = month[index];
+  // display table section
+  function displayTable(term, months) {
+    let tableBody = document.getElementById("tableResults");
+    let templateRow = document.getElementById("pbTemplate");
+    tableBody.innerHTML = "";
 
-    rowCols[1].classList.add(month[index + 1]);
-    rowCols[1].textContent = month[index + 1];
+    for (let index = 0; index <= term; index += 1) {
+      // let monthArr = [];
+      // for (let i = 0; i < term; i++) {
+      //   monthArr.push(monthArr[i]);
+      // }
+      // let month = monthArr;
 
-    rowCols[2].classList.add(month[index + 2]);
-    rowCols[2].textContent = month[index + 2];
+      let tableRow = document.importNode(templateRow.content, true);
 
-    rowCols[3].classList.add(month[index + 3]);
-    rowCols[3].textContent = month[index + 3];
+      let rows = tableRow.querySelectorAll("tr");
+      let rowCols = tableRow.querySelectorAll("td");
 
-    rowCols[4].classList.add(month[index + 4]);
-    rowCols[4].textContent = month[index + 4];
+      // rowCols[0].classList.add(months[index]);
+      rowCols[0].textContent = months[index];
 
-    // add all the rows to the table
-    tableBody.appendChild(tableRow);
+      // rowCols[1].classList.add(months[index + 1]);
+      rowCols[1].textContent = months[index + 1];
+
+      // rowCols[2].classList.add(months[index + 2]);
+      rowCols[2].textContent = months[index + 2];
+
+      // rowCols[3].classList.add(months[index + 3]);
+      rowCols[3].textContent = months[index + 3];
+
+      // rowCols[4].classList.add(months[index + 4]);
+      rowCols[4].textContent = months[index + 4];
+
+      // rowCols[5].classList.add(months[index + 5]);
+      rowCols[5].textContent = months[index + 5];
+
+      // add all the rows to the table
+      tableBody.appendChild(tableRow);
+    }
   }
 }
-// add event listener and run functionality
-const btn = document.getElementById("btnSubmit");
-const loan = btn.addEventListener("click", getLoan);
-const term = btn.addEventListener("click", getTerm);
-const rate = btn.addEventListener("click", getRate);
-const pbTemplate = btn.addEventListener("click", getPbTemplate);
 
+// add event listener and run functionality
+
+// btn.addEventListener("click", loan1);
+// btn.addEventListener("click", term1);
+// btn.addEventListener("click", rate1);
+// btn.addEventListener("click", pbTemplate1);
+// btn.addEventListener("click", totalMonthlyPayment1);
+// btn.addEventListener("click", totalInterest1);
+// btn.addEventListener("click", totalCost1);
+// btn.addEventListener("click", displayTotals1)
 // btn.addEventListener('click', () => {
 //     let loan = document.getElementById("loanAmount").value;
 //     let term = document.getElementById("term").value;

@@ -9,7 +9,8 @@ function runShit() {
   const rate1 = getRate();
   const pbTemplate1 = getPbTemplate();
   const totalMonthlyPayment1 = totalMonthlyPayment(loan1, term1, rate1);
-  const totalInterest1 = totalInterest(totalMonthlyPayment1, term1, loan1);
+  // const totalInterest1 = totalInterest(totalMonthlyPayment1, term1, loan1);
+  const totalInterest1 = generateInterest(loan1, term1, rate1);
   const totalCost1 = totalCost(loan1, totalInterest1);
   const displayTotals1 = displayTotals(
     totalMonthlyPayment1,
@@ -40,22 +41,31 @@ function runShit() {
     return pbTemplate;
   }
 
+  function generateInterest(loan, term, rate) {
+    let interest = loan * (rate / 100) * (term / 12);
+    interest = parseInt(interest);
+    return interest.toFixed(2);
+  }
+
   function totalMonthlyPayment(loan, term, rate) {
     let totalMonthlyPayment =
       (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
     return totalMonthlyPayment.toFixed(2);
   }
 
-  function totalInterest(totalMonthlyPayment, term, loan) {
-    let totalInterest = totalMonthlyPayment * term - loan;
-    return totalInterest.toFixed(2);
-  }
+  // function totalInterest(totalMonthlyPayment, term, loan) {
+  //   let totalInterest = totalMonthlyPayment * term - loan;
+  //   return totalInterest.toFixed(2);
+  // }
 
   function totalCost(loan, totalInterest) {
-    parseFloat(totalInterest);
-    parseInt(loan);
+    totalInterest = parseFloat(totalInterest);
+    loan = parseInt(loan);
+    console.log(typeof loan);
+    console.log(typeof totalInterest);
     loan += totalInterest;
-    return loan;
+    console.log(typeof loan);
+    return loan.toFixed(2);
   }
 
   function months(term) {
@@ -100,20 +110,20 @@ function runShit() {
       // rowCols[0].classList.add(months[index]);
       rowCols[0].textContent = months[index];
 
-      // rowCols[1].classList.add(months[index + 1]);
-      rowCols[1].textContent = months[index + 1];
+      // rowCols[1].classList.add(months[index]);
+      rowCols[1].textContent = months[index];
 
-      // rowCols[2].classList.add(months[index + 2]);
-      rowCols[2].textContent = months[index + 2];
+      // rowCols[2].classList.add(months[index]);
+      rowCols[2].textContent = months[index];
 
-      // rowCols[3].classList.add(months[index + 3]);
-      rowCols[3].textContent = months[index + 3];
+      // rowCols[3].classList.add(months[index]);
+      rowCols[3].textContent = months[index];
 
-      // rowCols[4].classList.add(months[index + 4]);
-      rowCols[4].textContent = months[index + 4];
+      // rowCols[4].classList.add(months[index]);
+      rowCols[4].textContent = months[index];
 
-      // rowCols[5].classList.add(months[index + 5]);
-      rowCols[5].textContent = months[index + 5];
+      // rowCols[5].classList.add(months[index]);
+      rowCols[5].textContent = months[index];
 
       // add all the rows to the table
       tableBody.appendChild(tableRow);
